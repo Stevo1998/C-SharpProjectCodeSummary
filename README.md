@@ -20,17 +20,17 @@ Below, I will describe the stories I worked on along with code snippets, picture
 * [API](#api)
 * [Front End Development](#front-end-development)
 
-##Front End Stories
+## Front End Stories
 
-###Story
+### Story
 
        code snippet here...
 
 *Jump to: [CRUD Functionality](#crud-functionality), [API](#api), [Front End Development](#front-end-development), [Page Top](#live-project)
 
-##Back End Stories
+## Back End Stories
 
-###Story
+### Story
 
        code snippet here...
 
