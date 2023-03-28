@@ -8,7 +8,7 @@ to work on feautures involving one of these three main areas. Since a lot of the
 there were plenty of back end and front end features yet to be implemented. I got to work on several front end stories and back end stories where I got the chance to 
 learn a lot of useful skills when working with the ASP.NET framework, the Entity framework with a code first focus, the Bootstrap framework, and how to use Razor Syntax to build dynamic websites using the C# language.
 
-Below, I will describe the stories I worked on along with code snippets, pictures and navigation links.
+Below, I will describe the stories I worked on along with code snippets and navigation links.
 
 ## Stories
 * [Back End Stories](#back-end-stories)
