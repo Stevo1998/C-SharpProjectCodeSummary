@@ -11,8 +11,84 @@ learn a lot of useful skills when working with the ASP.NET framework, the Entity
 Below, I will describe the stories I worked on along with code snippets, pictures and navigation links.
 
 ## Stories
-* [Front End Stories](#front-end-stories)
 * [Back End Stories](#back-end-stories)
+* [Front End Stories](#front-end-stories)
+
+## Back End Stories
+* [CRUD Functionality](#crud-functionality)
+* [Sorting Feature](#sorting-feature)
+* [Restriction Feature](#restriction-feature)
+
+### CRUD Functionality
+In this story, I tasked with creating an entity model for the retal area of the page and then add scaffolding pages to provide CRUD functionality to the user.
+First, I created a model fo the rental area thatt specified the names and types of variables that can exist in an object being created. This variables would then
+be used to create, edit, delete, or view details of an object being created in the rental area of the page.
+
+       namespace TheatreCMS3.Areas.Rent.Models
+       {
+           public class RentalHistory
+           {
+               public int RentalHistoryId { get; set; } /* Primary Key on Table */  
+               public bool RentalDamaged { get; set; }
+               public string DamageIncurred { get; set; }
+               public string Rental { get; set; }
+           }
+       }
+ 
+Second, I used the index page for the rental area to diplay a table where the user could create an object by providing the value for the variables defined in the
+model. Once an object was created, the table would then display this object along with links to give the object CRUD capabilities.
+
+      <h2>Index</h2>
+       <p>
+           @Html.ActionLink("Create New", "Create")
+       </p>
+       <table class="table">
+           <tr>
+               <th>
+                   @Html.DisplayNameFor(model => model.RentalDamaged)
+               </th>
+               <th>
+                   @Html.DisplayNameFor(model => model.DamageIncurred)
+               </th>
+               <th>
+                   @Html.DisplayNameFor(model => model.Rental)
+               </th>
+               <th></th>
+           </tr>
+           @foreach (var item in Model) 
+            {
+               <tr>
+                   <td>
+                       @Html.DisplayFor(modelItem => item.RentalDamaged)
+                   </td>
+                   <td>
+                       @Html.DisplayFor(modelItem => item.DamageIncurred)
+                   </td>
+                   <td>
+                       @Html.DisplayFor(modelItem => item.Rental)
+                   </td>
+                   <td>
+                       @Html.ActionLink("Edit", "Edit", new { id=item.RentalHistoryId }) |
+                       @Html.ActionLink("Details", "Details", new { id=item.RentalHistoryId }) |
+                       @Html.ActionLink("Delete", "Delete", new { id=item.RentalHistoryId })
+                   </td>
+               </tr>
+            }
+       </table>
+ 
+
+       code snippet here...
+       
+### Sorting Feature
+
+       code snippet here...
+       
+### Restriction Feature
+
+       code snippet here...
+              
+*Jump to: [CRUD Functionality](#crud-functionality), [API](#api), [Front End Development](#front-end-development), [Page Top](#live-project)
+*Jump to: [CRUD Functionality](#crud-functionality), [API](#api), [Front End Development](#front-end-development), [Page Top](#live-project)
 
 ## Front End Stories
 * [Number of Developers](#number-of-developers)
@@ -23,11 +99,11 @@ Below, I will describe the stories I worked on along with code snippets, picture
 ### Number of Developers
 I was tasked to create a JavaScript function that counted the number of names displayed on the SignIn page and display that number next to page header. I decided to create a function with two variables: one that was set equal to the span tag that would hold the number wanting to be dispplayed, and the other equal to the the length of div tag that held the total of p elements being counted. I then called the function on when the window loads to set the first variable being created and set it equal to the second variable, thus displaying the total number of p tags withing the div tag and display that number next to the page header. 
 
+The HTML Doc:
+
        <div class="py-5 text-center">
            @*Centered text and padded bottom*@
-
            <h1>Developers Of TheatreCMS &nbsp;<span id="NumPersons" class="badge badge-secondary">Total</span></h1>
-
            <h2>SignIn</h2>
               </div>
               @* Add your name to the bottom of the list like so: *@
@@ -243,7 +319,9 @@ I was tasked to create a JavaScript function that counted the number of names di
                          <p>Tina Morlock</p>
                          <p>Chase Martin</p>
                      </div>
-                     
+
+The JavaScript funtion:
+
       function totalUsers() {
     var nameList = document.getElementById("PersonList");
     var numberOfNames = nameList.children.length;
@@ -252,36 +330,130 @@ I was tasked to create a JavaScript function that counted the number of names di
     window.onload = totalUsers();                     
        
 ### Index Page Table
-I was tasked consisted on figuring out various elements of the object being tracked and create a model, a model form, and develop CRUD functionality to manage 
-the data being entered by the user. I decided to create a Web apllication where the user could add locations in Costa Rica that they consider worth visiting. I created a model with different categories for the user to fill out when a location is addded.
+This story required me to change the way the table in the index page was displayed to the user to better match the theme of the overall project page. There was numerous requirements the table should contain: I was asked for the table to display a red X or a green check depending on if the rental history being created was damaged or not, the name of the rental had to be styled to be displayed differently from the rest of the table elements, add a vertical elipsis icon to display the
+action links that redireect to CRUD pages, and also use an elipssis efecr to prevent the damages description from wrapping on more than one line. I decided to edit
+the table using a combiantion of CSS and bootstrap classes along with Razor Syntax whiting the document to meet all the requirements and Font-Awesome to display various icons within the page.
 
-       code snippet here...
-       
+      <div class="RentalHistory-Index--TableContainer">
+         <table class="RentalHistory-Index--Table">
+           <tr>
+             <th colspan="4">
+               Most recent Rental Histories
+             </th>
+           </tr>
+
+           @foreach (var item in Model)
+            {
+                 <tr>
+                       <td>
+                           @{var itemType = item.RentalDamaged;}
+                           @if (itemType == true) @*If rental is damaged - red X*@
+                            {
+                               <i class="fa fa-times-circle">@Html.DisplayFor(modelItem => item.RentalDamaged)</i>
+                            }
+                            else @*If rental is not damaged - green check*@
+                            {
+                               <i class="fa fa-check-circle">@Html.DisplayFor(modelItem => item.RentalDamaged)</i>
+                            }
+                       </td>
+                       <td>
+                           <div class="badge badge-dark">@Html.DisplayFor(modelItem => item.Rental)</div>
+                       </td>
+                       <td>
+                           <div class="ellipsis">@Html.DisplayFor(modelItem => item.DamageIncurred)</div> @*Ellipsis class to prevent more than one line*@
+                       </td>
+                       <td>
+                           <div class="dropdown">
+                               <button class="btn btn-dark" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                   <i class="fas fa-ellipsis-v"></i> @*Ellipsis icon containing CRUD links*@                                
+                               </button>
+                               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                   <div class="dropdown-item">
+                                       <i class="fa fa-pencil-square-o"></i>@Html.ActionLink("Edit", "Edit", new { id = item.RentalHistoryId })
+                                   </div>
+                                   <div class="dropdown-item">
+                                       <i class="fa fa-info-circle"></i>@Html.ActionLink("Details", "Details", new { id = item.RentalHistoryId })
+                                   </div>
+                                   <br />
+                                   <div class="dropdown-item">
+                                       <div class="delete">
+                                           <i class="fa fa-trash"></i>@Html.ActionLink("Delete", "Delete", new { id = item.RentalHistoryId })
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                       </td>
+                 </tr>
+            }
+         </table>
+      
 ### Create/Edit Page
+In this story I was tasked to style the create and edit pages for the rental area to better match the overall theme of the project and make it more simple for 
+the user to inoput the required variables for the model. I edited the form contained in this pages to meet all the requirements ggiven by the story. Some fields
+within the form had be changed around, also the max width of the form had to be restricted to 600 pixels, all the buttons had to be placed inside the form, and the label that contained a check box to field to mark if a rental was damaged or not had to dynamically change upon user input. If the box was checked the label would display "Damaged?", else it would display notes. I used CSS to meet most of the requirements in this story. However, I used a JavaScript funtion, along with an onclick event to call it, to dynamically change the label above the checkbox field.
 
-       code snippet here...
+The HTML doc:
+
+       @using (Html.BeginForm()) 
+       {
+           @Html.AntiForgeryToken()
+
+           <div id="RentalHistory--Create--Form" class="form-horizontal">
+               <hr />
+               @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+               <div class="RentalHistory--Create--formGroupSplit">
+                   <div class="RentalHistory--Create--column">
+                       @Html.LabelFor(model => model.Rental, htmlAttributes: new { @class = "control-label col-md-2" })
+                       <div class="RentalHistory--Create--colmd10">
+                           @Html.EditorFor(model => model.Rental, new { htmlAttributes = new { @class = "form-control" } })
+                           @Html.ValidationMessageFor(model => model.Rental, "", new { @class = "text-danger" })
+                       </div>
+                   </div>
+                   <div class="RentalHistory--Create--column">
+                       <label class="control-label col-md-2">Damaged?</label>
+                       <div class="RentalHistory--Create--colmd10">
+                           <div class="RentalHistory--Create--checkbox" onclick="notesToDamage('RentalDamaged','labelText')"> @*Calls JS Func on click*@
+                               @Html.EditorFor(model => model.RentalDamaged)
+                               @Html.ValidationMessageFor(model => model.RentalDamaged, "", new { @class = "text-danger" })
+                           </div>
+                       </div>
+                   </div>
+               </div>
+
+               <div class="form-group">
+                   <label id="labelText" class="RentalHistory--Create--colmd2 control-label mt-3">Notes</label>
+                   <div class="RentalHistory--Create--colmd10">
+                       @Html.EditorFor(model => model.DamageIncurred, new { htmlAttributes = new { @class = "form-control" } })
+                       @Html.ValidationMessageFor(model => model.DamageIncurred, "", new { @class = "text-danger" })
+                   </div>
+               </div>
+
+               <div class="RentalHistory--Create--dflex justify-content-center">
+                   <button type="button" class="btn btn-dark">
+                       @Html.ActionLink("Back to List", "Index")
+                   </button>
+                   <input type="submit" value="Create" class="btn btn-success" />
+               </div>
+           </div>
+       }
        
+The JavaScript function:
+
+      // Function to change the label on the Create and Edit Form depending on checkbox
+       function notesToDamage(thecheckbox, thelabel) {
+
+           var checkbox = document.getElementById(thecheckbox);
+           var label = document.getElementById(thelabel);
+           if (!checkbox.checked) {
+               label.innerHTML = "Notes";
+           }
+           else {
+               label.innerHTML = "Damages Incurred";
+           }
+       }
+      
 ### Accordiion Effect
-
-       code snippet here...
-              
-*Jump to: [CRUD Functionality](#crud-functionality), [API](#api), [Front End Development](#front-end-development), [Page Top](#live-project)
-*Jump to: [CRUD Functionality](#crud-functionality), [API](#api), [Front End Development](#front-end-development), [Page Top](#live-project)
-
-## Back End Stories
-* [CRUD Functionality](#crud-functionality)
-* [Sorting Feature](#sorting-feature)
-* [Restriction Feature](#restriction-feature)
-
-### CRUD Functionality
-
-       code snippet here...
-       
-### Sorting Feature
-
-       code snippet here...
-       
-### Restriction Feature
 
        code snippet here...
               
