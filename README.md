@@ -75,20 +75,127 @@ model. Once an object was created, the table would then display this object alon
                </tr>
             }
        </table>
- 
-
-       code snippet here...
        
 ### Sorting Feature
+In this story I was asked to add a sorting feature to the table being displayed on the index page of the rental area. The page had to display the histories created from newest to oldest and also have the capability to sort the table contents from A-Z, Z-A, damaged first, and undamaged first. I decided to accompplish this by changing the GET method for the index page within the controller for rhis area. I added a swtich statement to the method, and by using a different parameters from the query string in the URL the switch stament will choose one of the cases to return to the View, thus changing the order of the content in the table. 
 
-       code snippet here...
+       // GET: Rent/RentalHistories
+        public ActionResult Index(string sortOrder)
+        {
+            ViewBag.IdSortParm = String.IsNullOrEmpty(sortOrder) ? "Id" : "";
+            ViewBag.DamagedSortParm = sortOrder == "Damaged Rentals" ? "" : "Damaged Rentals";
+            ViewBag.UndamagedSortParm = sortOrder == "Undamaged Rentals" ? "" : "Undamaged Rentals";
+            ViewBag.AzSortParm = sortOrder == "Rentals A-Z" ? "" : "Rentals A-Z";
+            ViewBag.ZaSortParm = sortOrder == "Rentals Z-A" ? "" : "Rentals Z-A"; 
+            
+            var rentals = from r in db.RentalHistories
+                         select r;
+            switch (sortOrder)
+            {
+                case "Id":
+                    rentals = rentals.OrderByDescending(r => r.RentalHistoryId);
+                    break;
+                case "Damaged Rentals":
+                    rentals = rentals.OrderBy(r => r.RentalDamaged == false);
+                    break;
+                case "Undamaged Rentals":
+                    rentals = rentals.OrderBy(r => r.RentalDamaged == true);
+                    break;
+                case "Rentals A-Z":
+                    rentals = rentals.OrderBy(r => r.Rental);
+                    break;
+                case "Rentals Z-A":
+                    rentals = rentals.OrderByDescending(r => r.Rental);
+                    break;
+                default:
+                    rentals = rentals.OrderByDescending(r => r.RentalHistoryId);
+                    break;
+            }
+            return View(rentals.ToList());
+        }
        
 ### Restriction Feature
+The main goal of this task was to prevent any user from accessing the create, edit, and delete pages unless permission was granted to them.
 
-       code snippet here...
+The first part of this task (the first story) was to create a new model for the rental area that enhiridted from the ApplicationUser class within the project in order
+to create a manager role that acts as an admin to keep track of the histories of returned rentals. Then using this class a seed method was created where a manager role is created that seeds this user to the configuration file and records it in its databse. 
+       
+       public class HistoryManager : ApplicationUser
+       {
+              public int RestrictedUsers { get; set; }
+              public int RentalReplacementRequests { get; set; }
               
-*Jump to: [CRUD Functionality](#crud-functionality), [API](#api), [Front End Development](#front-end-development), [Page Top](#live-project)
-*Jump to: [CRUD Functionality](#crud-functionality), [API](#api), [Front End Development](#front-end-development), [Page Top](#live-project)
+              public static void Seed(ApplicationDbContext Mycontext)
+              {
+              var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(Mycontext));
+              var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(Mycontext));
+
+              // Creating a HistoryManager role
+              var role = new IdentityRole();
+              role.Name = "HistoryManager";
+              roleManager.Create(role);
+
+              // Instantiating an object of History Manager / Creating an User
+              var user = new HistoryManager
+              {
+                UserName = "Name",
+                Email = "name@mail.com",
+                RestrictedUsers = 2,
+                RentalReplacementRequests = 1
+              };
+              var userPassword = "password";
+              var manager = userManager.Create(user, userPassword);
+              if(manager.Succeeded) { userManager.AddToRole(user.Id, "HistoryManager"); }
+        }
+    }
+    
+Then I created a class with a method that redirects the user to a created view displaying the restricted page when an unauthrized user tries to access any of the restricted pages.
+
+       public class RentalHistoryAuthorization : AuthorizeAttribute
+    {
+        public string ViewName = "~/Rent/RentalHistories/AccessDenied";
+
+        protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
+        {
+            filterContext.Result = new RedirectResult(ViewName);
+        }
+
+        public override void OnAuthorization(AuthorizationContext filterContext)
+        {
+            if (AuthorizeCore(filterContext.HttpContext))
+            {
+                base.OnAuthorization(filterContext);
+            }
+            else
+            {
+                HandleUnauthorizedRequest(filterContext);
+            }
+        }
+
+    }
+    
+The view that the user is redirected to:
+
+      @model TheatreCMS3.Areas.Rent.Models.RentalHistory
+       @{
+           ViewBag.Title = "AccessDenied";
+           Layout = "~/Views/Shared/_Layout.cshtml";
+       }
+       <div class="RentalHistory-AccessDenied--MainContainer">
+           <div class="RentalHistory-AccessDenied--mainHeading">
+               <h1>You are not authorized to visit that page.</h1>
+           </div>
+           <div class="img-fluid mx-auto">
+               <img class="RentalHistory-AccessDenied--accessDeniedImage" src="~/Content/images/access_denied.png" alt="Access Denied" />
+           </div>
+           <div class="RentalHistory-AccessDenied--secondHeading">
+               <button type="button" class="RentalHistory-AccessDenied--loginButton">
+                   <h2>@Html.RouteLink("Login", new { action = "Login", controller = "Account", area = "" })</h2>
+               </button>
+           </div>
+       </div>
+              
+*Jump to: [Back End Stories](#back-end-stories), [Front End Stories](#front-end-stories), [Page Top](#live-project)
 
 ## Front End Stories
 * [Number of Developers](#number-of-developers)
@@ -457,7 +564,7 @@ The JavaScript function:
 
        code snippet here...
               
-*Jump to: [CRUD Functionality](#crud-functionality), [API](#api), [Front End Development](#front-end-development), [Page Top](#live-project)
-*Jump to: [CRUD Functionality](#crud-functionality), [API](#api), [Front End Development](#front-end-development), [Page Top](#live-project)
+*Jump to: [Back End Stories](#back-end-stories), [Front End Stories](#front-end-stories), [Page Top](#live-project)
 
 ## Another Important Skill
+This project taught me a lot about the software development industry as an individual programer and as part of a developement team as it was managed using the Agile/Scrum methodology during its process. The Project consisted of a two week sprint, during this time, each student was required to attend: a sprint planning session at the start of the sprint, daily stand-up meetings at the beggginning of each day, and a sprint review at the end of the sprint. Over the two week sprint I learned a lot about undividual strengths and weaknesses, I also had the opportunity to work under a project team environment where one's changes could affect the overall project.
