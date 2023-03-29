@@ -207,7 +207,7 @@ The view that the user is redirected to:
 I was tasked to create a JavaScript function that counted the number of names displayed on the SignIn page and display that number next to page header. I decided to create a function with two variables: one that was set equal to the span tag that would hold the number wanting to be dispplayed, and the other equal to the the length of div tag that held the total of p elements being counted. I then called the function on when the window loads to set the first variable being created and set it equal to the second variable, thus displaying the total number of p tags withing the div tag and display that number next to the page header. 
 
 <details>
-       <summary>The HTML doc</summary>
+       <summary>The HTML doc:</summary>
        
        <div class="py-5 text-center">
               @*Centered text and padded bottom*@
