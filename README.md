@@ -645,8 +645,7 @@ This story consisted of adding an accordion effect to the table on the index pag
                          </div>  
                      </td>
                  </tr>
-              }
-        
+              }        
          </table>
      </div>
               
