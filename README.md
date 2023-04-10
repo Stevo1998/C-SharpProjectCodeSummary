@@ -564,7 +564,7 @@ The JavaScript function:
        }
       
 ### Accordiion Effect
-This story consisted of adding an accordion effect to the table on the index page of the retal area. As the table displays a history of the rented items, next to the name of the rental I was tasked to display the damages incurred next to the name of each rented item, if no damages were incurred then display "None". Also, if no damages were incurred to an item, then an accordion effect was used to display the notes/details on that item inputed by the user/renter. To complete this story, I used the bootstrap framework to show the notes/details row on the table when the user clicks on an item and autohide when the user clicks on another.
+This story consisted of adding an accordion effect to the table on the index page of the retal area. As the table displays a history of the rented items, next to the name of the rental I was tasked to display the damages incurred next to the name of each rented item, if no damages were incurred then display "None". Also, if no damages were incurred to an item, then an accordion effect was used to display the notes/details on that item inputed by the user/renter. To complete this story, I modified various table elements using the bootstrap framework to show the notes/details row on the table when the user clicks on an item and autohide when the user clicks on another.
 
       <div id="myAccordion" class="RentalHistory-Index--TableContainer">
           <table id="indexTable" class="RentalHistory-Index--Table">
