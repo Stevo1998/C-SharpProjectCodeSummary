@@ -10,9 +10,14 @@ learn a lot of useful skills when working with the ASP.NET framework, the Entity
 
 Below, I will describe the stories I worked on along with code snippets and navigation links.
 
+
 ## Stories
 * [Back End Stories](#back-end-stories)
 * [Front End Stories](#front-end-stories)
+
+## Important Skill
+* [Another Important Skill](#another-important-skill)
+
 
 ## Back End Stories
 * [CRUD Functionality](#crud-functionality)
@@ -563,7 +568,7 @@ The JavaScript function:
            }
        }
       
-### Accordiion Effect
+### Accordion Effect
 This story consisted of adding an accordion effect to the table on the index page of the retal area. As the table displays a history of the rented items, next to the name of the rental I was tasked to display the damages incurred next to the name of each rented item, if no damages were incurred then display "None". Also, if no damages were incurred to an item, then an accordion effect was used to display the notes/details on that item inputed by the user/renter. To complete this story, I modified various table elements using the bootstrap framework to show the notes/details row on the table when the user clicks on an item and autohide when the user clicks on another.
 
       <div id="myAccordion" class="RentalHistory-Index--TableContainer">
@@ -652,4 +657,4 @@ This story consisted of adding an accordion effect to the table on the index pag
 *Jump to: [Back End Stories](#back-end-stories), [Front End Stories](#front-end-stories), [Page Top](#live-project)
 
 ## Another Important Skill
-This project taught me a lot about the software development industry as an individual programer and as part of a developement team as it was managed using the Agile/Scrum methodology during its process. The Project consisted of a two week sprint, during this time, each student was required to attend: a sprint planning session at the start of the sprint, daily stand-up meetings at the beggginning of each day, and a sprint review at the end of the sprint. Over the two week sprint I learned a lot about undividual strengths and weaknesses, I also had the opportunity to work under a project team environment where one's changes could affect the overall project.
+This project taught me a lot about the software development industry as an individual programer and as part of a developement team as it was managed using the Agile/Scrum methodology during its process. The Project consisted of a two week sprint, during this time, each student was required to attend: a sprint planning session at the start of the sprint, daily stand-up meetings at the beginning of each day, and a code retrospective review at the end of the sprint. Over the two week sprint I learned a lot about undividual strengths and weaknesses, I also had the opportunity to work under a project team environment where one's work could have a positive or negative impact on the overall project so communication and proper version control was very important.
