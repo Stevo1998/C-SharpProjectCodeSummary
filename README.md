@@ -16,7 +16,7 @@ Below, I will describe the stories I worked on along with code snippets and navi
 * [Front End Stories](#front-end-stories)
 
 ## Important Skills
-* [Other Important Skills](#other-important-skill)
+* [Other Important Skills](#other-important-skills)
 
 
 ## Back End Stories
