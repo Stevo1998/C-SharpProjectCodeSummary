@@ -15,8 +15,8 @@ Below, I will describe the stories I worked on along with code snippets and navi
 * [Back End Stories](#back-end-stories)
 * [Front End Stories](#front-end-stories)
 
-## Important Skill
-* [Another Important Skill](#another-important-skill)
+## Important Skills
+* [Other Important Skills](#other-important-skill)
 
 
 ## Back End Stories
@@ -656,5 +656,5 @@ This story consisted of adding an accordion effect to the table on the index pag
               
 *Jump to: [Back End Stories](#back-end-stories), [Front End Stories](#front-end-stories), [Page Top](#live-project)
 
-## Another Important Skill
+## Other Important Skills
 This project taught me a lot about the software development industry as an individual programer and as part of a developement team as it was managed using the Agile/Scrum methodology during its process. The Project consisted of a two week sprint, during this time, each student was required to attend: a sprint planning session at the start of the sprint, daily stand-up meetings at the beginning of each day, and a code retrospective review at the end of the sprint. Over the two week sprint I learned a lot about undividual strengths and weaknesses, I also had the opportunity to work under a project team environment where one's work could have a positive or negative impact on the overall project so communication and proper version control was very important.
