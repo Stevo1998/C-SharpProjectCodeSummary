@@ -564,8 +564,91 @@ The JavaScript function:
        }
       
 ### Accordiion Effect
+This story consisted of adding an accordion effect to the table on the index page of the retal area. As the table displays a history of the rented items, next to the name of the rental I was tasked to display the damages incurred next to the name of each rented item, if no damages were incurred then display "None". Also, if no damages were incurred to an item, then an accordion effect was used to display the notes/details on that item inputed by the user/renter. To complete this story, I used the bootstrap framework to show the notes/details row on the table when the user clicks on an item and autohide when the user clicks on another.
 
-       code snippet here...
+      <div id="myAccordion" class="RentalHistory-Index--TableContainer">
+          <table id="indexTable" class="RentalHistory-Index--Table">
+              <tr>
+                  <th colspan="4">
+                      Most recent Rental Histories
+                          <div class="float-right">
+                              <label>Sorted By:</label>
+                                  <button class="btnMargin btn btn-dark dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      No Extra Sorting...
+                                  </button>
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                      <div class="dropdown-item">@Html.ActionLink("No Extra Sorting...", "Index", new { sortOrder = ViewBag.IdSortParm })</div>
+                                      <div class="dropdown-item">@Html.ActionLink("Damaged Rentals", "Index", new { sortOrder = ViewBag.DamagedSortParm })</div>
+                                      <div class="dropdown-item">@Html.ActionLink("Undamaged Rentals", "Index", new { sortOrder = ViewBag.UndamagedSortParm })</div>
+                                      <div class="dropdown-item">@Html.ActionLink("Rentals A-Z", "Index", new { sortOrder = ViewBag.AzSortParm })</div>
+                                      <div class="dropdown-item">@Html.ActionLink("Rentals Z-A", "Index", new { sortOrder = ViewBag.ZaSortParm })</div>
+                                  </div>
+                           </div>
+                    </th>
+             </tr>
+
+             @foreach (var item in Model)
+             {
+                 <tr>
+                     <td>
+                         @{ var itemType = item.RentalDamaged; }
+                         @if (itemType == true)
+                         {
+                             <i class="fa fa-times-circle">@Html.DisplayFor(modelItem => item.RentalDamaged)</i>
+                         }
+                         else
+                         {
+                             <i class="fa fa-check-circle">@Html.DisplayFor(modelItem => item.RentalDamaged)</i>
+                         }
+                     </td>
+                     <td>
+                         <div class="badge badge-dark">@Html.DisplayFor(modelItem => item.Rental)</div>
+                     </td>
+                     <td>
+                         @{ var description = item.DamageIncurred; }
+                         @{ var damage = item.RentalDamaged; }
+                         @if (damage == false)
+                         {
+                             <div id="heading-@item.RentalHistoryId">
+                                 <div data-toggle="collapse" data-target="#collapse-@item.RentalHistoryId" aria-expanded="false" aria-controls="collapse-@item.RentalHistoryId">None.</div>
+                            </div>
+                         }
+                         else
+                         {
+                             <div class="text-truncate">@Html.DisplayFor(modelItem => item.DamageIncurred)</div>
+                         }
+                     </td>
+                     <td>
+                         <div class="dropdown">
+                             <button class="btnMargin btn btn-dark" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
+                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                 <div class="dropdown-item">
+                                     <i class="fa fa-pencil-square-o"></i>@Html.ActionLink("Edit", "Edit", new { id = item.RentalHistoryId })
+                                 </div>
+                                 <div class="dropdown-item">
+                                     <i class="fa fa-info-circle"></i>@Html.ActionLink("Details", "Details", new { id = item.RentalHistoryId })
+                                 </div>
+                                 <br />
+                                 <div class="dropdown-item">
+                                     <div class="delete">
+                                         <i class="fa fa-trash"></i>@Html.ActionLink("Delete", "Delete", new { id = item.RentalHistoryId })
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </td>
+                 </tr>
+                 <tr id="collapse-@item.RentalHistoryId" class="collapse" aria-labelledby="heading-@item.RentalHistoryId" data-parent="#myAccordion">
+                     <td class="RentalHistory-Index--HiddenCell" colspan="4">
+                         <div class="RentalHistory-Index--textTruncate">
+                             @Html.DisplayFor(modelItem => item.DamageIncurred)
+                         </div>  
+                     </td>
+                 </tr>
+              }
+        
+         </table>
+     </div>
               
 *Jump to: [Back End Stories](#back-end-stories), [Front End Stories](#front-end-stories), [Page Top](#live-project)
 
