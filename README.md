@@ -1,8 +1,8 @@
 # Live Project
 
 ## Introduction
-For the last two weeks of my time at the Tech Academy, I worked among other students in a team where, using the ASP.NET MVC and a code first Entity framework, 
-we developed an interactive website for managing the content and productions for a theater acting company. The Project is divided into several comparmentalized areas,
+For the last two weeks of my time at the Tech Academy, I worked among a team where, using the ASP.NET MVC and a code first Entity framework, 
+we developed an interactive website for managing the content and productions for a theater acting company. The Project was divided into several comparmentalized areas,
 the main three being: The production area, the rental area, and the blog area. The team members were divided into gropus and each group was then assignined 
 to work on feautures involving one of these three main areas. Since a lot of the team members, including myself, joined the project in the middle of its life cycle,
 there were plenty of back end and front end features yet to be implemented. I got to work on several front end stories and back end stories where I got the chance to 
