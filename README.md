@@ -19,12 +19,12 @@ Below, I will describe the stories I worked on along with code snippets and navi
 * [Other Important Skills](#other-important-skills)
 
 
-## Back End Stories
+### Back End Stories
 * [CRUD Functionality](#crud-functionality)
 * [Sorting Feature](#sorting-feature)
 * [Restriction Feature](#restriction-feature)
 
-### CRUD Functionality
+#### CRUD Functionality
 In this story, I tasked with creating an entity model for the retal area of the page and then add scaffolding pages to provide CRUD functionality to the user.
 First, I created a model fo the rental area thatt specified the names and types of variables that can exist in an object being created. This variables would then
 be used to create, edit, delete, or view details of an object being created in the rental area of the page.
@@ -81,7 +81,7 @@ model. Once an object was created, the table would then display this object alon
             }
        </table>
        
-### Sorting Feature
+#### Sorting Feature
 In this story I was asked to add a sorting feature to the table being displayed on the index page of the rental area. The page had to display the histories created from newest to oldest and also have the capability to sort the table contents from A-Z, Z-A, damaged first, and undamaged first. I decided to accompplish this by changing the GET method for the index page within the controller for rhis area. I added a swtich statement to the method, and by using a different parameters from the query string in the URL the switch stament will choose one of the cases to return to the View, thus changing the order of the content in the table. 
 
        // GET: Rent/RentalHistories
@@ -119,7 +119,7 @@ In this story I was asked to add a sorting feature to the table being displayed 
             return View(rentals.ToList());
         }
        
-### Restriction Feature
+#### Restriction Feature
 The main goal of this task was to prevent any user from accessing the create, edit, and delete pages unless permission was granted to them.
 
 The first part of this task (the first story) was to create a new model for the rental area that enhiridted from the ApplicationUser class within the project in order
@@ -202,13 +202,13 @@ The view that the user is redirected to:
               
 *Jump to: [Back End Stories](#back-end-stories), [Front End Stories](#front-end-stories), [Page Top](#live-project)
 
-## Front End Stories
+### Front End Stories
 * [Number of Developers](#number-of-developers)
 * [Index Page Table](#index-page-table)
 * [Create/Edit Page Form](#create/edit-page)
 * [Accordion Effect](#accordion-effect)
 
-### Number of Developers
+#### Number of Developers
 I was tasked to create a JavaScript function that counted the number of names displayed on the SignIn page and display that number next to page header. I decided to create a function with two variables: one that was set equal to the span tag that would hold the number wanting to be dispplayed, and the other equal to the the length of div tag that held the total of p elements being counted. I then called the function on when the window loads to set the first variable being created and set it equal to the second variable, thus displaying the total number of p tags withing the div tag and display that number next to the page header. 
 
 <details>
@@ -444,7 +444,7 @@ The JavaScript funtion:
     }
     window.onload = totalUsers();                     
        
-### Index Page Table
+#### Index Page Table
 This story required me to change the way the table in the index page was displayed to the user to better match the theme of the overall project page. There was numerous requirements the table should contain: I was asked for the table to display a red X or a green check depending on if the rental history being created was damaged or not, the name of the rental had to be styled to be displayed differently from the rest of the table elements, add a vertical elipsis icon to display the
 action links that redireect to CRUD pages, and also use an elipssis efecr to prevent the damages description from wrapping on more than one line. I decided to edit
 the table using a combiantion of CSS and bootstrap classes along with Razor Syntax whiting the document to meet all the requirements and Font-Awesome to display various icons within the page.
@@ -502,7 +502,7 @@ the table using a combiantion of CSS and bootstrap classes along with Razor Synt
             }
          </table>
       
-### Create/Edit Page
+#### Create/Edit Page
 In this story I was tasked to style the create and edit pages for the rental area to better match the overall theme of the project and make it more simple for 
 the user to inoput the required variables for the model. I edited the form contained in this pages to meet all the requirements ggiven by the story. Some fields
 within the form had be changed around, also the max width of the form had to be restricted to 600 pixels, all the buttons had to be placed inside the form, and the label that contained a check box to field to mark if a rental was damaged or not had to dynamically change upon user input. If the box was checked the label would display "Damaged?", else it would display notes. I used CSS to meet most of the requirements in this story. However, I used a JavaScript funtion, along with an onclick event to call it, to dynamically change the label above the checkbox field.
@@ -568,7 +568,7 @@ The JavaScript function:
            }
        }
       
-### Accordion Effect
+#### Accordion Effect
 This story consisted of adding an accordion effect to the table on the index page of the retal area. As the table displays a history of the rented items, next to the name of the rental I was tasked to display the damages incurred next to the name of each rented item, if no damages were incurred then display "None". Also, if no damages were incurred to an item, then an accordion effect was used to display the notes/details on that item inputed by the user/renter. To complete this story, I modified various table elements using the bootstrap framework to show the notes/details row on the table when the user clicks on an item and autohide when the user clicks on another.
 
       <div id="myAccordion" class="RentalHistory-Index--TableContainer">
